@@ -15,7 +15,8 @@ export const LoginForm = () => {
   const [error, setError] = useState("");
 
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/connectWallet";
+  // const callbackUrl = searchParams.get("callbackUrl") || "/connectWallet";
+  const callbackUrl = "/connectWallet";
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
