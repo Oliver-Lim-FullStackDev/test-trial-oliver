@@ -153,7 +153,7 @@ export function MyTable({ tabvalue }: { tabvalue: string }) {
 
   useEffect(() => {
     fetchData();
-  }, [displayType, fetchData]);
+  }, [displayType]);
 
   return (
     <>
