@@ -26,7 +26,7 @@ import {
 } from "@/components/ui/table";
 import { DataTablePagination } from "./table-pagination";
 import { fetchTableData } from "../../app/api/thegraphs/fetchData";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react"
+import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { Button } from "../ui/button";
 
 export type DataType = {
@@ -54,7 +54,7 @@ export const columns: ColumnDef<DataType>[] = [
           TOKEN 0
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => (
       <div className="capitalize">{row.original.token0.symbol}</div>
@@ -71,7 +71,7 @@ export const columns: ColumnDef<DataType>[] = [
           TOKEN 1
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => (
       <div className="capitalize">{row.original.token1.symbol}</div>
@@ -88,7 +88,7 @@ export const columns: ColumnDef<DataType>[] = [
           AMOUNT
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => {
       const totalValueLockedUSD = parseFloat(
@@ -113,7 +113,7 @@ export const columns: ColumnDef<DataType>[] = [
           TXN
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => (
       <div className="capitalize">{row.getValue("txCount")}</div>
@@ -130,7 +130,7 @@ export const columns: ColumnDef<DataType>[] = [
           VOLUME
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => {
       const volumeUSD = parseFloat(row.getValue("volumeUSD"));
@@ -153,7 +153,7 @@ export const columns: ColumnDef<DataType>[] = [
           LIQUIDITY
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => {
       const liquidity = parseFloat(row.getValue("liquidity"));
@@ -197,27 +197,27 @@ export function MyTable({ tabvalue }: { tabvalue: string }) {
 
   const fetchData = async () => {
     let uniswapData, pancakeswapData: any;
-    try{
-    switch (displayType) {
-      case "All":
-        uniswapData = await fetchTableData(UNISWAP_URL);
-        pancakeswapData = await fetchTableData(PANCAKESWAP_URL);
-        setData([...uniswapData, ...pancakeswapData] as DataType[]);
-        break;
-      case "Uniswap":
-        uniswapData = await fetchTableData(UNISWAP_URL);
-        setData(uniswapData as DataType[]);
-        break;
-      case "Pancakeswap":
-        pancakeswapData = await fetchTableData(PANCAKESWAP_URL);
-        setData(pancakeswapData as DataType[]);
-        break;
-    }
+    try {
+      switch (displayType) {
+        case "All":
+          uniswapData = await fetchTableData(UNISWAP_URL);
+          pancakeswapData = await fetchTableData(PANCAKESWAP_URL);
+          setData([...uniswapData, ...pancakeswapData] as DataType[]);
+          break;
+        case "Uniswap":
+          uniswapData = await fetchTableData(UNISWAP_URL);
+          setData(uniswapData as DataType[]);
+          break;
+        case "Pancakeswap":
+          pancakeswapData = await fetchTableData(PANCAKESWAP_URL);
+          setData(pancakeswapData as DataType[]);
+          break;
+      }
     } catch (error: any) {
-      if (error.name === 'RateLimitError') {
+      if (error.name === "RateLimitError") {
         setError("Rate limit exceeded. Please retry after 1 hour.");
       } else {
-        setError('An unexpected error occurred. Please try again later.');
+        setError("An unexpected error occurred. Please try again later.");
       }
     }
   };
@@ -226,7 +226,13 @@ export function MyTable({ tabvalue }: { tabvalue: string }) {
     fetchData();
   }, [displayType]);
 
-  if (error) return <div><span className="text-red-500 text-center">Error:  </span>{error}</div>;
+  if (error)
+    return (
+      <div>
+        <span className="text-red-500 text-center">Error: </span>
+        {error}
+      </div>
+    );
 
   return (
     <>

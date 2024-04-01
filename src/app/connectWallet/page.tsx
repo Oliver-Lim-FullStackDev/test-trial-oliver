@@ -37,30 +37,32 @@ const WalletStatus = () => {
 };
 
 export default function ConnectWallet() {
-  const { data: session } = useSession(); 
+  const { data: session } = useSession();
   const user = session?.user;
 
   return (
     <>
-      {user &&<WagmiProvider config={config}>
-        <QueryClientProvider client={queryClient}>
-          <RainbowKitProvider>
-            <section className="bg-ct-blue-600  min-h-screen pt-20">
-              <div className="max-w-4xl mx-auto bg-ct-dark-100 rounded-md h-[20rem] flex justify-center items-center">
-                <div>
-                  <p className="mb-3 text-5xl text-center font-semibold">
-                    Connect your wallet
-                  </p>
-                  <div className="flex justify-center mt-12">
-                  <ConnectButton />
+      {user && (
+        <WagmiProvider config={config}>
+          <QueryClientProvider client={queryClient}>
+            <RainbowKitProvider>
+              <section className="bg-ct-blue-600  min-h-screen pt-20">
+                <div className="max-w-4xl mx-auto bg-ct-dark-100 rounded-md h-[20rem] flex justify-center items-center">
+                  <div>
+                    <p className="mb-3 text-5xl text-center font-semibold">
+                      Connect your wallet
+                    </p>
+                    <div className="flex justify-center mt-12">
+                      <ConnectButton />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </section>
-            <WalletStatus />
-          </RainbowKitProvider>
-        </QueryClientProvider>
-      </WagmiProvider>}
+              </section>
+              <WalletStatus />
+            </RainbowKitProvider>
+          </QueryClientProvider>
+        </WagmiProvider>
+      )}
     </>
   );
 }

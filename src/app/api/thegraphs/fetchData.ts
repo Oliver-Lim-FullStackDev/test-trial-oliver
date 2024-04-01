@@ -6,7 +6,7 @@ class RateLimitError extends Error {
 
   constructor(message: string, retryAfter: number) {
     super(message);
-    this.name = 'RateLimitError';
+    this.name = "RateLimitError";
     this.retryAfter = retryAfter;
 
     //Set the prototype explicitly.
@@ -69,13 +69,13 @@ export const fetchTableData = async (subgraphType: string) => {
     if (error instanceof RateLimitError) {
       console.log(`Please retry after ${error.retryAfter} seconds.`);
       return {
-          error: `Please retry after ${error.retryAfter} seconds.`,
-      }
+        error: `Please retry after ${error.retryAfter} seconds.`,
+      };
     } else {
-      console.error('An unexpected error occurred:', error);
+      console.error("An unexpected error occurred:", error);
       return {
-        error: 'An unexpected error occurred.',
-      }
+        error: "An unexpected error occurred.",
+      };
     }
   }
 };
@@ -88,7 +88,16 @@ const isValidData = (data: any) => {
   }
 
   for (const item of data) {
-    if (!item || typeof item !== "object" || !item.token0 || !item.token1 || !item.txCount || !item.volumeUSD || !item.liquidity || !item.totalValueLockedUSD) {
+    if (
+      !item ||
+      typeof item !== "object" ||
+      !item.token0 ||
+      !item.token1 ||
+      !item.txCount ||
+      !item.volumeUSD ||
+      !item.liquidity ||
+      !item.totalValueLockedUSD
+    ) {
       return false;
     }
   }

@@ -38,7 +38,7 @@ const Header = () => {
           {user && (
             <>
               <li>
-                <Link href="/dashboard" className="text-ct-dark-600">
+                <Link href="/connectWallet" className="text-ct-dark-600">
                   Dashboard
                 </Link>
               </li>

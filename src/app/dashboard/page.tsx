@@ -23,7 +23,6 @@ const config = getDefaultConfig({
 const queryClient = new QueryClient();
 
 const SignOutButton = () => {
-
   const { disconnect } = useDisconnect();
   const signOutHandler = async () => {
     try {
@@ -36,7 +35,11 @@ const SignOutButton = () => {
     }
   };
 
-  return <Button className="w-24 bg-blue-500 mx-auto mt-60" onClick={signOutHandler}>Log Out</Button>;
+  return (
+    <Button className="w-24 bg-blue-500 mx-auto mt-60" onClick={signOutHandler}>
+      Log Out
+    </Button>
+  );
 };
 
 export default function Dashboard() {
@@ -76,7 +79,9 @@ export default function Dashboard() {
                       <TabsList>
                         <TabsTrigger value="all">All</TabsTrigger>
                         <TabsTrigger value="uniswap">Uniswap</TabsTrigger>
-                        <TabsTrigger value="pancakeswap">Pancakeswap</TabsTrigger>
+                        <TabsTrigger value="pancakeswap">
+                          Pancakeswap
+                        </TabsTrigger>
                       </TabsList>
                       <TabsContent value="all">
                         <MyTable tabvalue="All" />

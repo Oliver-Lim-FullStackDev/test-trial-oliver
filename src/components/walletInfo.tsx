@@ -2,9 +2,9 @@ import { useConnect, useAccount, useEnsAvatar, useEnsName } from "wagmi";
 import { normalize } from "viem/ens";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 export function WalletInfo() {
-  const { error } = useConnect();  
+  const { error } = useConnect();
   const { isConnected, address, connector } = useAccount();
-  
+
   // Fetch ENS name
   const ensName = useEnsName({
     address: address,

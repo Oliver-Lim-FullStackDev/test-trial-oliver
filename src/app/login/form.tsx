@@ -4,6 +4,7 @@ import { ChangeEvent, useState } from "react";
 import { signIn } from "next-auth/react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 export const LoginForm = () => {
   const router = useRouter();
@@ -58,7 +59,7 @@ export const LoginForm = () => {
         <p className="text-center bg-red-300 py-4 mb-6 rounded">{error}</p>
       )}
       <div className="mb-6">
-        <input
+        <Input
           required
           type="email"
           name="email"
@@ -69,7 +70,7 @@ export const LoginForm = () => {
         />
       </div>
       <div className="mb-6">
-        <input
+        <Input
           required
           type="password"
           name="password"
