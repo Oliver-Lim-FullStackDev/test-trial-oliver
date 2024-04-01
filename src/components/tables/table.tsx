@@ -26,6 +26,8 @@ import {
 } from "@/components/ui/table";
 import { DataTablePagination } from "./table-pagination";
 import { fetchTableData } from "../../app/api/thegraphs/fetchData";
+import { ArrowUpDown, MoreHorizontal } from "lucide-react"
+import { Button } from "../ui/button";
 
 export type DataType = {
   token0: {
@@ -43,21 +45,51 @@ export type DataType = {
 export const columns: ColumnDef<DataType>[] = [
   {
     accessorKey: "token0.symbol",
-    header: "TOKEN 0",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          TOKEN 0
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
     cell: ({ row }) => (
       <div className="capitalize">{row.original.token0.symbol}</div>
     ),
   },
   {
     accessorKey: "token1.symbol",
-    header: "TOKEN 1",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          TOKEN 1
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
     cell: ({ row }) => (
       <div className="capitalize">{row.original.token1.symbol}</div>
     ),
   },
   {
     accessorKey: "totalValueLockedUSD",
-    header: "AMOUNT",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          AMOUNT
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
     cell: ({ row }) => {
       const totalValueLockedUSD = parseFloat(
         row.getValue("totalValueLockedUSD")
@@ -72,14 +104,34 @@ export const columns: ColumnDef<DataType>[] = [
   },
   {
     accessorKey: "txCount",
-    header: "TXN",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          TXN
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
     cell: ({ row }) => (
       <div className="capitalize">{row.getValue("txCount")}</div>
     ),
   },
   {
     accessorKey: "volumeUSD",
-    header: "VOLUME",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          VOLUME
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
     cell: ({ row }) => {
       const volumeUSD = parseFloat(row.getValue("volumeUSD"));
       const formatted = new Intl.NumberFormat("en-US", {
@@ -92,7 +144,17 @@ export const columns: ColumnDef<DataType>[] = [
   },
   {
     accessorKey: "liquidity",
-    header: "LIQUIDITY",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          LIQUIDITY
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
     cell: ({ row }) => {
       const liquidity = parseFloat(row.getValue("liquidity"));
       const formatted = new Intl.NumberFormat("en-US", {
