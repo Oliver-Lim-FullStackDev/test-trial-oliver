@@ -59,6 +59,7 @@ export default function Dashboard() {
                         alt="logo"
                         width={100}
                         height={100}
+                        priority
                       />
                       <p className="text-2xl font-semibold text-center">
                         <span className="text-blue-600 text-3xl">DEX</span>

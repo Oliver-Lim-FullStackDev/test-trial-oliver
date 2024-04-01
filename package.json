@@ -28,6 +28,8 @@
     "@types/node": "^20.10.5",
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.18",
+    "@upstash/ratelimit": "^1.0.1",
+    "@upstash/redis": "^1.29.0",
     "autoprefixer": "^10.4.16",
     "bcryptjs": "^2.4.3",
     "buffer": "^6.0.3",

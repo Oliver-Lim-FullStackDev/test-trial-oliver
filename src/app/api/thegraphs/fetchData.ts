@@ -1,4 +1,19 @@
 import NodeCache from "node-cache";
+import { setupRateLimiter } from "./rateLimiter";
+
+class RateLimitError extends Error {
+  retryAfter: number;
+
+  constructor(message: string, retryAfter: number) {
+    super(message);
+    this.name = 'RateLimitError';
+    this.retryAfter = retryAfter;
+
+    //Set the prototype explicitly.
+    Object.setPrototypeOf(this, RateLimitError.prototype);
+  }
+}
+
 export const fetchTableData = async (subgraphType: string) => {
   const myCache = new NodeCache({ stdTTL: 3600, checkperiod: 120 });
   const cacheKey = `subgraph-data-${subgraphType}`;
@@ -8,8 +23,7 @@ export const fetchTableData = async (subgraphType: string) => {
     return cachedData; // Return the cached data if it exists
   }
 
-  try {
-    const uniswapGraphQuery = `query {
+  const theGraphQuery = `query {
       pools(orderBy: id) {
         token0 {
           symbol
@@ -23,17 +37,21 @@ export const fetchTableData = async (subgraphType: string) => {
         totalValueLockedUSD
       }
     }`;
-    const options = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        query: uniswapGraphQuery,
-      }),
-    };
-    const queryURL = `https://api.thegraph.com/subgraphs/name/${subgraphType}`;
+  const options = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: theGraphQuery,
+    }),
+  };
+  const queryURL = `https://api.thegraph.com/subgraphs/name/${subgraphType}`;
+  try {
+    //Check rate limit before making the call
+    await setupRateLimiter(subgraphType);
+    // Fetch the data from the subgraph
     const response = await fetch(queryURL, options);
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      throw new Error("Network response was not ok");
     }
     const queryResult = await response.json();
     const data = queryResult?.data?.pools;
@@ -43,6 +61,17 @@ export const fetchTableData = async (subgraphType: string) => {
 
     return data;
   } catch (error) {
-    console.error(error);
+    if (error instanceof RateLimitError) {
+      console.log(`Please retry after ${error.retryAfter} seconds.`);
+      return {
+          error: `Please retry after ${error.retryAfter} seconds.`,
+      }
+    } else {
+      console.error('An unexpected error occurred:', error);
+      return {
+        error: 'An unexpected error occurred.',
+      }
+    }
   }
+  
 };

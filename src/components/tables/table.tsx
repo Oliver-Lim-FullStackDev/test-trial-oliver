@@ -114,6 +114,7 @@ export function MyTable({ tabvalue }: { tabvalue: string }) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [error, setError] = useState("");
 
   const table = useReactTable({
     data,
@@ -134,6 +135,7 @@ export function MyTable({ tabvalue }: { tabvalue: string }) {
 
   const fetchData = async () => {
     let uniswapData, pancakeswapData: any;
+    try{
     switch (displayType) {
       case "All":
         uniswapData = await fetchTableData(UNISWAP_URL);
@@ -149,11 +151,20 @@ export function MyTable({ tabvalue }: { tabvalue: string }) {
         setData(pancakeswapData as DataType[]);
         break;
     }
+    } catch (error: any) {
+      if (error.name === 'RateLimitError') {
+        setError("Rate limit exceeded. Please retry after 1 hour.");
+      } else {
+        setError('An unexpected error occurred. Please try again later.');
+      }
+    }
   };
 
   useEffect(() => {
     fetchData();
   }, [displayType]);
+
+  if (error) return <div><span className="text-red-500 text-center">Error:  </span>{error}</div>;
 
   return (
     <>
