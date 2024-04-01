@@ -6,23 +6,36 @@ The task is to create a Dapp where a user can view  swaps transactions from panc
 
 ## Task Requirements
 ### Front-End Development
-- Build a responsive UI with React and Next.js.
-- Implement Tailwind CSS for styling.
-- Utilize shadcn for component design.
+- [x] Build a responsive UI with React and Next.js.
+- [x] Implement Tailwind CSS for styling.
+- [x] Utilize shadcn for component design.
 
 ### Database Integration
-- Integrate Superbase for back-end services.
-- Design and implement a database schema using Prisma or Drizzle.
-- Ensure proper data flow between the front-end and database.
+- [x] Integrate Superbase for back-end services.
+- [x] Design and implement a database schema using Prisma or Drizzle.
+- [x] Ensure proper data flow between the front-end and database.
 
 ### Authentication
-- Implement user authentication using AuthJS (Next-Auth).
+- [x] Implement user authentication using AuthJS (Next-Auth).
 
 ### Evaluation Criteria
-- Code quality and structure.
-- Adherence to project requirements.
-- Creativity and problem-solving skills.
-- Communication and adherence to deadlines.
+- [x] Code quality and structure.
+- [x] Adherence to project requirements.
+- [x] Creativity and problem-solving skills.
+- [x] Communication and adherence to deadlines.
+
+## Trial Test Requirements
+
+### API features
+- [x] Server-Side API Endpoint Setup.
+- [x] External API Integration.
+- [x] Client-Side API Calls Handling.
+- [x] External API Integration.
+- [x] Implement caching mechanisms on the server side to reduce the load on external APIs and improve response times for frequently requested data.
+- [ ] Consider using Next.js's Incremental Static Regeneration (ISR) for data that doesn't change often, reducing the need for real-time API calls.
+- [x] Error Handling and Validation.
+
+
 
 
 ## Demo
